@@ -3,26 +3,15 @@ import { CardContext } from "../CardContext";
 import { json } from "react-router-dom";
 
 function Cart({ id, category, title, price, description, image, cartData }) {
-  const { totalCount, setTotalCount } = useContext(CardContext);
+  const { totalCount, setTotalCount,addToCart } = useContext(CardContext);
 
   const truncateText = (text, maxLength) =>
     text.length > maxLength ? text.slice(0, maxLength) + "..." : text;
 
-  const addToCart = (id) => {
-    const product = cartData.find((item) => item.id === id);
-    
-    setTotalCount((prevCount) => prevCount + 1);
-    // localStorage.setItem('totalCount', JSON.stringify(totalCount));
-    
-
-    let item = localStorage.getItem(id)
-      ? JSON.parse(localStorage.getItem(id))
-      : { ...product, count: 0 };
-
-    item.count++;
-    localStorage.setItem(id, JSON.stringify(item));
-    console.log(`Added ${item.title} to cart`);
-  };
+  const handleAddToCart =() => {
+    const product = {id, image, title, description,price};
+    addToCart(product);
+  }
 
   return (
     <div className="p-4 bg-white shadow-md border border-black rounded">
@@ -46,7 +35,7 @@ function Cart({ id, category, title, price, description, image, cartData }) {
           <button
             className="border border-black px-4 py-1.5 rounded bg-black text-white"
             id={id}
-            onClick={() => addToCart(id)}
+            onClick={handleAddToCart}
           >
             Add to Cart
           </button>

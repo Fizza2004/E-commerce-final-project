@@ -25,7 +25,6 @@ export default function Products() {
   }
 
   return (
-    <CardProvider>
       <div className="max-w-screen-xl mx-auto pt-16">
         {/* Section Title */}
         <div className="text-center pt-5 pb-4">
@@ -83,6 +82,5 @@ export default function Products() {
           ))}
         </div>
       </div>
-    </CardProvider>
   );
 }
