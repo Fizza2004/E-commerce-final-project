@@ -4,7 +4,7 @@ import EmptyCard from "../EmptyCard";
 import CartItem from "../CartItem";
 
 export default function Bucket() {
-  const {cart} = useContext(CardContext);
+  const {cart,totalCount} = useContext(CardContext);
   console.log(cart);
   const totalPrice = cart.reduce((sum,item)=> sum+item.quantity*item.price,0);
   console.log(totalPrice);
@@ -40,8 +40,8 @@ export default function Bucket() {
                 <h2 className="text-lg font-bold border-b pb-2">Order Summary</h2>
                 <div className="py-4">
                   <div className="flex justify-between mb-2">
-                    <p>Products (1)</p>
-                    <p>${totalPrice}</p>
+                    <p>Products ({totalCount})</p>
+                    <p>${totalPrice.toFixed(2)}</p>
                   </div>
                   <div className="flex justify-between mb-2">
                     <p>Shipping</p>
@@ -49,7 +49,7 @@ export default function Bucket() {
                   </div>
                   <div className="flex justify-between font-bold">
                     <p>Total amount</p>
-                    <p>{totalPrice+30}</p>
+                    <p>${(totalPrice+30).toFixed(2)}</p>
                   </div>
                 </div>
                 <button className="w-full bg-gray-800 text-white py-2 rounded-md hover:bg-gray-700">
